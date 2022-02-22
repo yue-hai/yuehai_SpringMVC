@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<h1>首页</h1>
+<!-- 路径使用 / 代表是绝对路径，是：http://localhost:8080/工程名/ -->
+<!-- @{/target}：使用控制器中注解为 @RequestMapping("/target") 的方法 -->
+<a th:href="@{/target}">访问目标页面：target.html</a><br/>
+</body>
+</html>

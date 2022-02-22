@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="02_RequestMapping注解" />
+        <module name="06_HandlerInterceptor" />
+        <module name="07_FullAnnotation" />
+        <module name="04_RESTful" />
+        <module name="02_RequestMapping" />
+        <module name="05_HttpMessageConverter" />
+        <module name="01_MVC_demo" />
+        <module name="03_request" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="01_MVC" target="1.5" />
+      <module name="02_RequestMapping注解" target="1.5" />
+      <module name="03_request域对象" target="1.5" />
+      <module name="03_域对象共享数据" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

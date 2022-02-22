@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<h1>首页</h1>
+<!-- 路径使用 / 代表是绝对路径，是：http://localhost:8080/工程名/ -->
+<!-- @{/}：请求地址，使用控制器中注解为 @RequestMapping("/") 的方法 -->
+<a th:href="@{/}">访问目标页面：target.html</a><br/>
+
+<a th:href="@{/testRequestByServletAPI}">通过servletAPI向request域对象共享数据</a><br/>
+<a th:href="@{/testModelAndView}">通过ModelAndView向request域对象共享数据</a><br/>
+<a th:href="@{/testModel}">通过Model向request域对象共享数据</a><br/>
+<a th:href="@{/testMap}">通过Map向request域对象共享数据</a><br/>
+<a th:href="@{/testModelMap}">通过ModelMap向request域对象共享数据</a><br/>
+<hr/>
+<a th:href="@{/testSession}">通过servletAPI向Session域对象共享数据</a><br/>
+<a th:href="@{/testApplication}">通过servletAPI向application域对象共享数据</a><br/>
+<hr/>
+<a th:href="@{/testThymeleafView}">测试ThymeleafView</a><br/>
+<a th:href="@{/testForward}">测试转发视图Forward</a><br/>
+<a th:href="@{/testRedirect}">测试重定向视图testRedirect</a><br/>
+<hr/>
+<a th:href="@{/user}">RESTful：查询所有用户信息</a><br/>
+<!-- @{/user/1}：请求地址为 /user ，/1 为传输的参数 -->
+<a th:href="@{/user/1}">RESTful：根据id查询用户信息</a><br/>
+<hr/>
+<form th:action="@{/user}" method="post">
+    用户名：<input type="text" name="username"><br/>
+    密码：<input type="password" name="password"><br/>
+    <input type="submit" name="添加用户信息"><br/>
+</form>
+<hr/>
+<!-- 请求方式必须为 post -->
+<form th:action="@{/user}" method="post">
+    <!-- 隐藏域，name属性的值必须为_method，value的值PUT表示修改（更新） -->
+    <input type="hidden" name="_method" value="PUT">
+    用户名：<input type="text" name="username"><br/>
+    密码：<input type="password" name="password"><br/>
+    <input type="submit" name="修改用户信息"><br/>
+</form>
+<hr/>
+<!-- 删除一般是使用超链接，但又需要用到表单，所以需要js或ajax，此处先不写 -->
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+success.html<br/>
+<!-- 获取 request 域中的名称为 testScope 的内容 -->
+<p th:text="${testScope}"></p>
+<!-- 获取 session 域中的名称为 testSessionScope 的内容 -->
+<p th:text="${session.testSessionScope}"></p>
+<!-- 获取 application 域中的名称为 testApplicationScope 的内容 -->
+<p th:text="${application.testApplicationScope}"></p>
+</body>
+</html>

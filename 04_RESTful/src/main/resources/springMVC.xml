@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- 自动扫描包，扫描组件 -->
+    <context:component-scan base-package="com.yuehai.mvc" />
+
+    <!-- 配置Thymeleaf视图解析器 -->
+    <bean id="viewResolver" class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+        <!-- 设置试图解析器的优先级 -->
+        <property name="order" value="1" />
+        <!-- 解析视图时所用的编码 -->
+        <property name="characterEncoding" value="UTF-8" />
+        <!-- 当前所用的模板 -->
+        <property name="templateEngine">
+            <!-- 配置模板，这个内部 bean 为上一个属性 templateEngine 赋值 -->
+            <bean class="org.thymeleaf.spring5.SpringTemplateEngine">
+                <!-- 解析视图的策略 -->
+                <property name="templateResolver">
+                    <!-- 配置解析视图的策略，这个内部 bean 为上一个属性 templateResolver 赋值 -->
+                    <bean class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+                        <!-- 视图前缀 -->
+                        <property name="prefix" value="/WEB-INF/templates/" />
+                        <!-- 视图后缀 -->
+                        <property name="suffix" value=".html" />
+                        <!-- 使用的模板的模型 -->
+                        <property name="templateMode" value="HTML5" />
+                        <!-- 页面中使用的编码 -->
+                        <property name="characterEncoding" value="UTF-8" />
+                    </bean>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <!--
+        配置视图控制器 view-controller：单纯只进行跳转的请求最好使用视图控制器
+        path：设置处理的请求地址
+        view-name：设置请求地址所对应的视图名称
+    -->
+    <!--suppress SpringXmlModelInspection，此注解作用是抑制 view-name="index" 的报错-->
+    <mvc:view-controller path="/" view-name="index" />
+    <!--suppress SpringXmlModelInspection，此注解作用是抑制 view-name="index" 的报错-->
+    <mvc:view-controller path="/toAdd" view-name="employee_add" />
+
+    <!-- 开启mvc注解驱动的标签 -->
+    <mvc:annotation-driven />
+
+    <!--
+        开放对静态资源的访问
+        处理静态资源，例如html、js、css、jpg
+        若只设置该标签，则只能访问静态资源，其他请求则无法访问
+        此时必须设置<mvc:annotation-driven/>解决问题
+    -->
+    <mvc:default-servlet-handler />
+
+    <!-- 开启mvc注解驱动 -->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <!-- 处理响应中文内容乱码 -->
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="defaultCharset" value="UTF-8" />
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html</value>
+                        <value>application/json</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+</beans>

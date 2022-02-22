@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<h1>首页</h1>
+<!-- 路径使用 / 代表是绝对路径，是：http://localhost:8080/工程名/ -->
+<!-- @{/target}：请求地址，使用控制器中注解为 @RequestMapping("/target") 的方法 -->
+<a th:href="@{/target}">访问目标页面：target.html</a><br/>
+<a th:href="@{/testRequestMapping}">访问目标页面：testRequestMapping.html，请求地址为：/testRequestMapping</a><br/>
+<a th:href="@{/test}">访问目标页面：testRequestMapping.html，请求地址为：/test</a><br/>
+
+<form th:action="@{/testRequestMapping}" method="post">
+    <input type="submit" value="测试RequestMapping注解的method属性">
+</form>
+
+<form th:action="@{/testRequestMapping}" method="put">
+    <input type="submit" value="测试form表单是否能够发送put或delete请求">
+</form>
+
+<form th:action="@{/testRequestMapping}" method="get">
+    <input type="text" name="username">
+    <input type="submit" value="测试RequestMapping注解的params属性">
+</form>
+
+<a th:href="@{/ttrget}">访问目标页面：target.html，请求地址为：/t?rget</a><br/>
+<a th:href="@{/t+-()x:xxx}">访问目标页面：target.html，请求地址为：/t?*</a><br/>
+<a th:href="@{/a/s/d/f/g/h/j/t1b2n3n4m5}">访问目标页面：target.html，请求地址为：/**/t*</a><br/>
+
+<a th:href="@{/target2/1/yuehai}">访问目标页面：target.html，测试路径中的占位符-->/totarget2</a><br/>
+
+<hr/>
+
+<!-- @{/testServletAPI(username='yuehai')}：thymeleaf中的url，()中的内容代表请求的参数 -->
+<a th:href="@{/testServletAPI(username='yuehai')}">测试通过ServletAPI获取请求参数</a><br/>
+<form th:action="@{/testParam}" method="get">
+    用户名：<input type="text" name="username"><br/>
+    密码：<input type="password" name="password"><br/>
+    复选框：<input type="checkbox" name="hobby" value="a">a
+    <input type="checkbox" name="hobby" value="b">b
+    <input type="checkbox" name="hobby" value="c">c<br/>
+    <input type="submit" value="测试通过控制器方法的形参获取请求参数">
+</form><br/>
+
+<a th:href="@{/testRequestParam(user_name='yuehai',password='000123')}">测试通过@RequestParam获取请求参数</a><br/>
+<a th:href="@{/testRequestHeader}">测试通过@RequestHeader获取请求参数</a><br/>
+
+<a th:href="@{/addSession}">创建session</a><br/>
+<a th:href="@{/testCookieValue}">测试通过@CookieValue获取请求参数</a><br/>
+
+<form th:action="@{/testPojo}" method="post">
+    用户名：<input type="text" name="username"><br>
+    密码：<input type="password" name="password"><br>
+    性别：<input type="radio" name="sex" value="男">男
+          <input type="radio" name="sex" value="女">女<br>
+    年龄：<input type="text" name="age"><br>
+    邮箱：<input type="text" name="email"><br>
+    <input type="submit">
+</form>
+
+</body>
+</html>

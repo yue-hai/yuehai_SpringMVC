@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>首页</h1>
+<form th:action="@{/testRequestBody}" method="post">
+    用户名：<input type="text" name="username"><br>
+    密码：<input type="password" name="password"><br>
+    <input type="submit" value="测试@RequestBody注解">
+</form>
+
+<hr/>
+
+<form th:action="@{/testRequestEntity}" method="post">
+    用户名：<input type="text" name="username"><br>
+    密码：<input type="password" name="password"><br>
+    <input type="submit" value="测试RequestEntity类型参数">
+</form>
+
+<hr/>
+
+<a th:href="@{/testHttpServletResponse}">测试通过 HttpServletResponse 响应浏览器数据</a><br/>
+<a th:href="@{/testResponseBody}">测试通过 @ResponseBody 注解响应浏览器数据</a><br/>
+<a th:href="@{/testResponseBodyUser}">测试通过 @ResponseBody 注解响应浏览器数据（User）</a><br/>
+
+<!-- 测试 SpringMVC 通过 @ResponseBody 处理 ajax 请求 -->
+<div id="app">
+    <!-- @click="testAjax"：调用函数名为 testAjax 的函数 -->
+    <a th:href="@{/testAjax}" @click="testAjax">测试通过 @ResponseBody 处理 ajax 请求</a><br>
+</div>
+
+<hr/>
+
+<a th:href="@{/file}">进入下载和上传文件页面</a><br/>
+
+<!-- 引入 vue.js -->
+<script type="text/javascript" th:src="@{/static/js/vue.js}"></script>
+<!-- 引入 axios.js -->
+<script type="text/javascript" th:src="@{/static/js/axios.min.js}"></script>
+
+<script type="text/javascript">
+    var vue = new Vue({
+        // 需要进行操作的标签的 id
+        el: "#app",
+        // 声明方法
+        methods: {
+            // 声明函数 testAjax
+            testAjax: function (event) {
+                axios({
+                    // 请求方式
+                    method: "post",
+                    // 请求地址设置为：当前超链接的 href 的值
+                    url: event.target.href,
+                    // 传输到服务器的参数
+                    params: {
+                        username: "admin",
+                        password: "123456"
+                    }
+                // Ajax 处理成功之后执行的函数
+                // response：服务器传输过来的数据
+                }).then(function (response) {
+                    // 弹窗显示服务器传输过来的数据
+                    alert(response.data);
+                });
+                // 取消超链接的默认行为
+                event.preventDefault();
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

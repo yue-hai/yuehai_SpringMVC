@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Employee</title>
+</head>
+<body>
+<h1>更新</h1>
+<form th:action="@{/employee}" method="post">
+    <!-- HiddenHttpMethodFilter要求：必须传输_method请求参数，并且值为最终的请求方式 -->
+    <input type="hidden" name="_method" value="put">
+    <!-- 隐藏域2，回显id，并传输id至服务器 -->
+    <input type="hidden" name="id" th:value="${employee.id}">
+    lastName:<input type="text" name="lastName" th:value="${employee.lastName}"><br>
+    email:<input type="text" name="email" th:value="${employee.email}"><br>
+    <!--
+        th:field="${employee.gender}"可用于单选框或复选框的回显
+        若单选框的value和employee.gender的值一致，则添加checked="checked"属性
+    -->
+    gender:<input type="radio" name="gender" value="1" th:field="${employee.gender}">male
+    <input type="radio" name="gender" value="0" th:field="${employee.gender}">female<br>
+    <!-- 提交按钮 -->
+    <input type="submit" value="update">
+</form>
+
+</body>
+</html>
